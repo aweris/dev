@@ -13,6 +13,7 @@ M = $(shell printf "\033[34;1m▶\033[0m")
 # External targets
 include .bingo/Variables.mk
 include scripts/make/help.mk
+include scripts/make/k3d.mk
 
 #  Non phony targets
 $(TMP_DIR): ; $(info $(M) creating tmp directory ...)

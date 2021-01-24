@@ -1,0 +1,32 @@
+apiVersion: k3d.io/v1alpha1
+kind: Simple
+name: dev
+servers: 3
+agents: 3
+exposeAPI:
+  hostIP: "0.0.0.0"
+  port: "6443"
+image: docker.io/rancher/k3s:v1.20.0-k3s2
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+  - port: 443:443
+    nodeFilters:
+      - loadbalancer
+  - port: 9999:9999
+    nodeFilters:
+      - loadbalancer
+options:
+  k3d:
+    wait: true
+    timeout: "60s"
+    disableLoadbalancer: false
+    disableImageVolume: false
+  k3s:
+    extraServerArgs:
+      - --no-deploy=traefik
+    extraAgentArgs: [ ]
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true

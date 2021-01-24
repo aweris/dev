@@ -12,3 +12,13 @@ GO     ?= $(shell which go)
 #
 #include .bingo/Variables.mk # Assuming -dir was set to .bingo .
 #
+#command: $(K3D)
+#	@echo "Running k3d"
+#	@$(K3D) <flags/args..>
+#
+K3D := $(GOBIN)/k3d-v4.0.0
+$(K3D): .bingo/k3d.mod
+	@# Install binary/ries using Go 1.14+ build command. This is using bwplotka/bingo-controlled, separate go module with pinned dependencies.
+	@echo "(re)installing $(GOBIN)/k3d-v4.0.0"
+	@cd .bingo && $(GO) build -mod=mod -modfile=k3d.mod -o=$(GOBIN)/k3d-v4.0.0 "github.com/rancher/k3d/v4"
+
