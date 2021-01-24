@@ -1,0 +1,26 @@
+experimental:
+  plugins:
+    enabled: true
+logs:
+  general:
+    level: DEBUG
+  access:
+    enabled: true
+    fields:
+      headers:
+        defaultmode: keep
+globalArguments:
+  - "--global.checknewversion"
+ports:
+  web:
+    expose: true
+    port: 8080
+    exposedPort: 80
+  websecure:
+    expose: true
+    port: 8443
+    exposedPort: 443
+  admin:
+    expose: true
+    port: 9999
+    exposedPort: 9999

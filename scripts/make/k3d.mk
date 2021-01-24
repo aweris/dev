@@ -5,6 +5,9 @@ K3D_CLUSTER_CONFIG := $(RESOURCES_DIR)/k3d/$(K3D_CLUSTER).yaml
 K3D_EXTRA_ARGS     ?= ""
 K3D_ARGS           := $(K3D_EXTRA_ARGS)
 
+# Scripts
+INIT_K3S_SERVICES  := $(SCRIPTS_DIR)/k3s/init-k3s-services.sh
+
 .PHONY: k3d_list
 k3d_list: ## list cluster(s)
 k3d_list: $(K3D)
@@ -14,6 +17,7 @@ k3d_list: $(K3D)
 k3d_create: ## create a new cluster
 k3d_create: $(K3D) $(TMP_DIR); $(info $(M) creating cluster $(K3D_CLUSTER) ...)
 	$(Q) $(K3D) cluster create --config $(K3D_CLUSTER_CONFIG) $(K3D_ARGS)
+	$(Q) RESOURCES_DIR=$(RESOURCES_DIR) $(INIT_K3S_SERVICES)
 
 .PHONY: k3d_delete
 k3d_delete: ## delete cluster
