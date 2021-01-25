@@ -1,0 +1,9 @@
+# Argo expects the password in the secret to be bcrypt hashed. You can create this hash with `htpasswd -nbBC 10 "" $ARGO_PWD | tr -d ':\n' | sed 's/$2y/$2a/'`
+# default password is admin
+configs:
+  secret:
+    argocdServerAdminPassword: $2a$10$gGYq8hG4C4p3QaRzWn4pFucvn8yrRK/baz9DsbPH/cQ/61hZbMox2
+    argocdServerAdminPasswordMtime: "2021-01-01T00:00:00Z" # https://github.com/argoproj/argo-helm/issues/347
+server:
+  extraArgs:
+    - --insecure
