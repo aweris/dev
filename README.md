@@ -18,5 +18,5 @@ Targets:
 
 ## Services
 
-- https://traefik.k3d.localhost/dashboard/
-- https://argocd.k3d.localhost/ , username=admin, password=admin
+- http://traefik.k3d.localhost/dashboard/
+- http://argocd.k3d.localhost/ , username=admin, password=admin
