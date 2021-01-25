@@ -4,6 +4,8 @@ set -euo pipefail
 
 RESOURCES_DIR=${RESOURCES_DIR:-"resources"}
 
+HELM_CMD=${HELM_CMD:-"helm"}
+
 TRAEFIK_REPO_NAME="traefik"
 TRAEFIK_REPO_URL="https://helm.traefik.io/traefik"
 TRAEFIK_CHART_NAME="traefik"
@@ -25,20 +27,20 @@ ARGOCD_MANIFESTS="${RESOURCES_DIR}/manifests/argocd/"
 
 init() {
   # Add repositories
-  helm repo add "${TRAEFIK_REPO_NAME}" "${TRAEFIK_REPO_URL}"
-  helm repo add "${ARGOCD_REPO_NAME}" "${ARGOCD_REPO_URL}"
+  ${HELM_CMD} repo add "${TRAEFIK_REPO_NAME}" "${TRAEFIK_REPO_URL}"
+  ${HELM_CMD} repo add "${ARGOCD_REPO_NAME}" "${ARGOCD_REPO_URL}"
 
   # Update repo
-  helm repo update
+  ${HELM_CMD} repo update
 
   # Install traefik
-  helm upgrade --install "${TRAEFIK_RELEASE_NAME}" "${TRAEFIK_REPO_NAME}/${TRAEFIK_CHART_NAME}" \
+  ${HELM_CMD} upgrade --install "${TRAEFIK_RELEASE_NAME}" "${TRAEFIK_REPO_NAME}/${TRAEFIK_CHART_NAME}" \
     --version "${TRAEFIK_CHART_VERSION}" \
     --namespace "${TRAEFIK_NS}" --create-namespace \
     --values "${TRAEFIK_VALUES}"
 
  # Install traefik
-  helm upgrade --install "${ARGOCD_RELEASE_NAME}" "${ARGOCD_REPO_NAME}/${ARGOCD_CHART_NAME}" \
+  ${HELM_CMD} upgrade --install "${ARGOCD_RELEASE_NAME}" "${ARGOCD_REPO_NAME}/${ARGOCD_CHART_NAME}" \
     --version "${ARGOCD_CHART_VERSION}" \
     --namespace "${ARGOCD_NS}" --create-namespace \
     --values "${ARGOCD_VALUES}"

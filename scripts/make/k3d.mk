@@ -17,9 +17,9 @@ k3d_list: $(K3D)
 
 .PHONY: k3d_create
 k3d_create: ## create a new cluster
-k3d_create: $(K3D) $(TMP_DIR) $(K3D_REG_CONFIG) ; $(info $(M) creating cluster $(K3D_CLUSTER) ...)
+k3d_create: $(K3D) $(HELM) $(TMP_DIR) $(K3D_REG_CONFIG) ; $(info $(M) creating cluster $(K3D_CLUSTER) ...)
 	$(Q) $(K3D) cluster create --config $(K3D_CLUSTER_CONFIG) --registry-config $(K3D_REG_CONFIG) $(K3D_ARGS)
-	$(Q) RESOURCES_DIR=$(RESOURCES_DIR) $(INIT_K3S_SERVICES)
+	$(Q) RESOURCES_DIR=$(RESOURCES_DIR) HELM_CMD=$(HELM) $(INIT_K3S_SERVICES)
 
 .PHONY: k3d_delete
 k3d_delete: ## delete cluster
