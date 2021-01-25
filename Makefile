@@ -3,7 +3,13 @@ ROOT_DIR      := $(CURDIR)
 SCRIPTS_DIR   := $(ROOT_DIR)/scripts
 RESOURCES_DIR := $(ROOT_DIR)/resources
 TMP_DIR       := $(ROOT_DIR)/tmp
+HELM_DIR      := $(ROOT_DIR)/.helm
 GOBIN         := $(ROOT_DIR)/.gobin
+
+# override helm path configurations
+export XDG_CACHE_HOME  := $(HELM_DIR)/cache
+export XDG_CONFIG_HOME := $(HELM_DIR)/config
+export XDG_DATA_HOME   := $(HELM_DIR)/home
 
 # Helper variables
 V = 0

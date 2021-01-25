@@ -3,4 +3,5 @@
 
 # Temporary directories
 .gobin/
+.helm/
 tmp/
