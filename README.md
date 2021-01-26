@@ -20,3 +20,17 @@ Targets:
 
 - http://traefik.k3d.localhost/dashboard/
 - http://argocd.k3d.localhost/ , username=admin, password=admin
+
+### ArgoCD cli cheatsheet
+
+- login
+
+```shell
+argocd login localhost:9999 --insecure --username admin --password admin --plaintext
+```
+
+- add a repository using local ssh private key 
+
+```shell
+argocd repo add ssh://git@git.example.com:2222/repos/repo --ssh-private-key-path  ~/.ssh/id_rsa
+```

@@ -20,7 +20,7 @@ ports:
     expose: true
     port: 8443
     exposedPort: 443
-  admin:
+  argocd:
     expose: true
     port: 9999
     exposedPort: 9999
